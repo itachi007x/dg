@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy birthday💖 </title>
+
+    <style>
+        :root {
+            --hot-pink: #ff006e;
+            --soft-pink: #ff85a1;
+            --deep-rose: #c9184a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top, #ffe5ec, #ffb3c6, #ff8fab);
+            color: var(--deep-rose);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Floating Hearts Background */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            color: var(--hot-pink);
+            animation: floatUp 6s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .page {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .active {
+            display: flex;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .photo-card {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background: white;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .love-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 0, 110, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .photo-card:hover .love-overlay {
+            opacity: 1;
+        }
+
+        .btn {
+            background: var(--hot-pink);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,0,110,0.4);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="heart-container"></div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+    <h1>HAPPY BRTHDAY RAJNI(daraii gainda🐃💕). MAY GOD GIVES U ALL THE HAPPINESS AND MAY U LIVE A BEAUTIFUL LIFE💕.</h1>
+    <div id="word-container" style="font-size: 3rem; font-weight: bold;"></div>
+    <button class="btn" onclick="playMusic(); nextPage(2)">
+    Start Celebration ✨
+</button>
+
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <h1>MY DEAREST SISTER👑</h1>
+    <div class="photo-grid" id="grid"></div>
+    <button class="btn" onclick="nextPage(3)">See My Message ❤️</button>
+</div>
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <div style="background: white; padding: 40px; border-radius: 20px; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <h2>To Dearest DARAII GAINDA❤💖</h2>
+        <p>
+        To Daraii Gainda🤣(Beloved sister)
+            if i could give you one gift, it would be the ability to see the world through my eyes.
+            Only then you would realize how truly special you are. You lights up my life with your word,
+            smile.  I hope you and your family have a beatiful and prosperous life .. and u have a better furure in your life.
+        </p>
+        <p>❤️❤️❤️</p>
+        <p>
+        Hey DG,
+          First of all HAPPY BIRTHDAY and guru maharaj mere krn tere te and all your family and friends...
+          i hope u enjoyed these 2 years with me in this collage 🤣🤣
+          i know mai ehna special tani aa ... pr mai frr v tenu apni bhen bnaya a ,..... u are my sister from another mother..
+          mai eh ni kehna k enjoy na kro life ch prr jinaa chir asi eh enjoyment ch time waste krde aa os tym apne parents ware socho te 
+          te dekho oh kida pdha rhe tuhnu mai tera mood khrab ni krna chauna tere bday te mai .... mai bhen mnya aa ta mera frz bnda 
+          shi glt dsn da so mai ehi khunga k ( SAMUNDAR TE RAAJ KRN ALE SHOTO MOTI MACHLIA NAL DIL NI LANDE)
+          so bss ehi k pdya krr and once again HAPPY BIRTHDAY RAJNI MAY GOD BLESS U WITH ALL THE HAPPINESS U DESERVE💕
+        
+        </p>
+    </div>
+</div>
+<audio id="bg-music" loop>
+  <source src="./music/birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    /* Typing Effect */
+    const text = "Happy Birthday Rajni 💖";
+    let i = 0;
+    const container = document.getElementById("word-container");
+
+    function typeText() {
+        if (i < text.length) {
+            container.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeText, 120);
+        }
+    }
+    typeText();
+
+    /* Photos */
+const rajniPhotos = [
+  "./images/rajni.jpeg",
+  "./images/rajni2.jpeg",
+  "./images/rajni3.jpeg",
+  "./images/rajni4.jpeg",
+  "./images/rajni5.jpeg",
+  "./images/rajni6.jpeg"
+];
+
+
+
+    const messages = ["gorgeous", "Sister from anther mother", "Daraai gainda", "vehli", "bjurg g", "crime partner"];
+
+    const grid = document.getElementById("grid");
+    rajniPhotos.forEach((url, index) => {
+        grid.innerHTML += `
+            <div class="photo-card">
+                <img src="${url}">
+                <div class="love-overlay">${messages[index]}</div>
+            </div>
+        `;
+    });
+    function playMusic() {
+    const music = document.getElementById("bg-music");
+    music.play();
+}
+
+function nextPage(num) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + num).classList.add('active');
+
+    const music = document.getElementById("bg-music");
+    music.play();
+}
+
+    /* Heart Background Animation */
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 12) + "px";
+        document.getElementById("heart-container").appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 250);
+
+</script>
+
+</body>
+
+</html>
